@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>VUE.js AC2</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var vApp;
+        function createVueInstancia() {
+            vApp = new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        resultado: null,
+                    }
+                },
+                methods: {
+                    apiAC2: function (paramApi) {
+                        axios.get('https://https://acdois.herokuapp.com/API6/' + paramApi).then(response => 
+                        (this.resultado = response.data))
+                    },
+                }
+            })
+        }
+
+        function chamarApi() {
+            vApp.apiAC2(document.getElementById("num1").value);
+        }
+    </script>
+</head>
+<body onload="createVueInstancia();">
+    <div id="app">
+        <h1>AC2 - API5 - Multiplicação</h1>
+        Numero 1:<input type="text" id="num1" />
+        <br />
+        <br />
+        <input type="button" value="Chamar" onclick="chamarApi();" />
+       
+
+        <h2>Retorno API: {{resultado}}</h2>
+        <br /><br />
+    </div>
+    
+</body>
+</html>
